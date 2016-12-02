@@ -1,6 +1,9 @@
+analyse <- function(prefix){
 rm(list = ls())
+  wrkspc <- sprintf('H:/LUST/new_data/%simputed.Rdata',prefix)
+  load(wrkspc)
 ## loads workspace saved from the imputation
-load('H:/LUST/new_data/x4_imputed.Rdata')
+#load('H:/LUST/new_data/x4_imputed.Rdata')
 #load('H:/LUST/new_data/x6_imputed.Rdata')
 
 library(mice)
@@ -110,3 +113,4 @@ outplot
 
 
 ######################################
+}

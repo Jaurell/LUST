@@ -1,6 +1,9 @@
+impute <- function(prefix){
 rm(list = ls())
+  wrkspc <- sprintf('H:/LUST/new_data/%spre_impute.Rdata',prefix)
+  load(wrkspc)
 ##uncomment to choose cohort
-load('H:/LUST/new_data/x4_pre_impute.Rdata') ## EX2004 
+#load('H:/LUST/new_data/x4_pre_impute.Rdata') ## EX2004 
 #load('H:/LUST/new_data/x6_pre_impute.Rdata') ## EX2006
 ##
 
@@ -75,4 +78,5 @@ for (x in 1:(length(df)-1)){
 save.image(file = sprintf('H:/LUST/new_data/%simputed.Rdata',prefix))
 
 ## uncomment if you want to do the analysis right after the imputation
-source('analyse.R')
+#source('analyse.R')
+}
