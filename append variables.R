@@ -1,12 +1,10 @@
 append_variables <- function(prefix){
-rm(list = ls())
+#rm(list = ls())
 library(haven)
-  wrkspc <- sprintf('H:/LUST/new_data/%s_prime.Rdata',prefix)
+  wrkspc <- sprintf('H:/LUST/new_data/%sprime.Rdata',prefix)
   load(wrkspc)
 ## reads workspace from reprime
 
-#load('H:/LUST/new_data/x4_prime.Rdata')
-#load('H:/LUST/new_data/x6_prime.Rdata')
 
 fulldata <- tempdf
 new <- colnames(fulldata)
@@ -15,6 +13,8 @@ org <- colnames(org_data)
 ## makes list of variables in the original dataset that are not included
 new_vars <- subset(org, !(org %in% new[new != id]))
 add_data <- org_data[new_vars]
+
+imputs <-length(unique(fulldata$Imputation_))-1
 
 ## if a variable is named ID this renames it to ID.2 ID is the variable name spss uses for multiple imputation datasets
 if ('ID' %in% colnames(add_data)){
@@ -40,12 +40,6 @@ for (v in colnames(df)){
 }
 
 
-## saves an image of the workspace for later use.
-#save.image(file = sprintf('H:/LUST/new_data/%sprime_all.Rdata',prefix))
-save.image(file = sprintf('C:/Users/jonaur/Desktop/Jon/%sprime_all.Rdata',prefix))
 
-## saves a spss file on the harddrive (it takes a long time if you want to save it on the network drive)
-## This file will be very big, to reduce the size open it in spss and save it.
-write_sav(df, sprintf('C:/Users/jonaur/Desktop/Jon/%sprime_all.sav',prefix))
-
+return(df)
 }

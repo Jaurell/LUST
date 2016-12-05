@@ -1,11 +1,7 @@
 impute <- function(prefix){
-rm(list = ls())
-  wrkspc <- sprintf('H:/LUST/new_data/%spre_impute.Rdata',prefix)
-  load(wrkspc)
-##uncomment to choose cohort
-#load('H:/LUST/new_data/x4_pre_impute.Rdata') ## EX2004 
-#load('H:/LUST/new_data/x6_pre_impute.Rdata') ## EX2006
-##
+  wrkspc <- sprintf('H:/LUST/new_data/%spre_impute.Rdata',prefix) # location of saved workspace form the preparation step
+  load(wrkspc) # load the workspace
+
 
 library(mice)
 
@@ -31,13 +27,13 @@ first_imp <- 0
 for (var in colnames(vars)){
   meth <- NULL
   mi <- vars[var]
-  mi <- mi[!is.na(mi)]
+  mi <- mi[!is.na(mi)] ## mi is the list of variables to be imputed together. 
   for (v in mi){
     l <- unique(rdata_rev[[v]])
     if (length(l[!is.na(l)]) == 2){
-      meth[v] <- 'logreg'
+      meth[v] <- 'logreg' # log reg method for dicotomus variables
     } else {
-      meth[v] <- 'pmm'
+      meth[v] <- 'pmm' # predictive mean matching for poly
     }
   }
   if (length(mi) > 1){## skips imputation if an item is measured less than twice
@@ -74,9 +70,6 @@ for (x in 1:(length(df)-1)){
 }
 
 
-## saves workspace for later steps
-save.image(file = sprintf('H:/LUST/new_data/%simputed.Rdata',prefix))
 
-## uncomment if you want to do the analysis right after the imputation
-#source('analyse.R')
+return(midata)
 }

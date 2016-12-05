@@ -1,3 +1,6 @@
+## value labels for items c('x6_1burpload','x6_1burprew','x6_1burpcomm','x6_1burpcont','x6_1burpfair','x6_1burpval') 
+# needs to be shortend in order to be able to save the file to an spss format
+
 library(haven)
 library(expss)
 source('functions.R')
